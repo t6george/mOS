@@ -7,7 +7,7 @@ SECTIONS
 	. = 0x01000000;
 	.text :
 	{
-		*(multiboot)
+		*(.multiboot)
 		*(.text*)
 		*(.rodata)
 		
@@ -16,9 +16,10 @@ SECTIONS
 	.data :
 	{
 		start_ctors = .;
-		KEEP(*(init_array));
-		KEEP(*(SORT_BY_INIT_PRIORITY( .init_array.*)));
+		KEEP(*( .init_array ));
+		KEEP(*(SORT_BY_INIT_PRIORITY( .init_array.* )));
 		end_ctors = .;
+		*(.data)
 	}
 
 	.bss :
@@ -27,7 +28,7 @@ SECTIONS
 	}
 	/DISCARD/ :
 	{
-		*(.fini_array*)
-		*(.comment)
+		*( .fini_array* )
+		*( .comment )
 	}
 }

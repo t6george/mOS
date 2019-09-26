@@ -1,8 +1,11 @@
 .set MAGIC, 0x1badb002
-.set FLAGS, 3
+.set FLAGS, 0x3
 .set CHECKSUM, -(FLAGS+MAGIC)
 
 .section .multiboot
+	.long MAGIC
+	.long FLAGS
+	.long CHECKSUM
 
 .section .text
 .extern kernelEntry
