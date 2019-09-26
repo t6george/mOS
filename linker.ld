@@ -4,7 +4,7 @@ OUTPUT_ARCH(i386:i386)
 
 SECTIONS 
 {
-	. = 0x01000000
+	. = 0x01000000;
 	.text :
 	{
 		*(multiboot)
