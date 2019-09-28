@@ -1,27 +1,17 @@
-.set MAGIC, 0x1badb002
-.set FLAGS, 0x3
-.set CHECKSUM, -(FLAGS+MAGIC)
+global loader
 
-.section .multiboot
-	.long MAGIC
-	.long FLAGS
-	.long CHECKSUM
+MAGIC_NUMBER equ 0x1BADB002
+FLAGS	     equ 0x0
+CHECKSUM     equ -MAGIC_NUMBER
 
-.section .text
-.extern kernelEntry
-.global loader
+section .text:
+align 4
+	dd MAGIC_NUMBER
+	dd FLAGS
+	dd CHECKSUM
 
 loader:
-	mov $kernel_stack, %esp
-	push %eax
-	push %ebx
-	call kernelEntry	
+	mov eax, 0xCAFEBABE
 
-_stop:
-	cli
-	hlt
-	jmp _stop
-
-.section .bss
-.space (1 << 21) #2 MB for stack
-kernel_stack: 
+.loop:
+	jmp .loop
