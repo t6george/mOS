@@ -1,35 +1,38 @@
-GPP_PARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore
-ASM_PARAMS = --32
-LD_PARAMS = -melf_i386
+OBJECTS = loader.o kmain.o
+CC = gcc
+CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
+	-nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
+LDFLAGS = -T link.ld -melf_i386
+AS = nasm
+ASFLAGS = -f elf
 
-OBJS = loader.o kernel.o
+all: kernel.elf
 
-%.o: %.cpp
-	gcc $(GPP_PARAMS) -o $@ -c $<
+kernel.elf: $(OBJECTS)
+	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
-loader.o: loader.s
-	as $(ASM_PARAMS) -o $@ $<
+os.iso: kernel.elf
+	cp kernel.elf iso/boot/kernel.elf
+	genisoimage -R                              \
+	    -b boot/grub/stage2_eltorito    \
+	    -no-emul-boot                   \
+	    -boot-load-size 4               \
+	    -A os                           \
+	    -input-charset utf8             \
+	    -quiet                          \
+	    -boot-info-table                \
+	    -o os.iso                       \
+	    iso
 
-mykernel.bin: linker.ld $(OBJS)
-	ld $(LD_PARAMS) -T $< -o $@ $(OBJS)
+run: os.iso
+	bochs -f bochsrc.txt -q
 
-install: mykernel.bin
-	sudo cp $< /boot/mykernel.bin
+%.o: %.c
+	$(CC) $(CFLAGS)  $< -o $@
 
-mykernel.iso: mykernel.bin
-	mkdir iso
-	mkdir iso/boot
-	mkdir iso/boot/grub
-	cp $< iso/boot/
-	echo 'set timeout=0' > iso/boot/grub/grub.cfg
-	echo 'set default=0' >> iso/boot/grub/grub.cfg
-	echo '' >> iso/boot/grub/grub.cfg
-	echo 'menuentry "My operating System" {' >> iso/boot/grub/grub.cfg
-	echo '	multiboot /boot/mykernel.bin' >> iso/boot/grub/grub.cfg
-	echo '	boot' >> iso/boot/grub/grub.cfg
-	echo '}' >> iso/boot/grub/grub.cfg
-	grub-mkrescue --output=$@ iso
-	rm -rf iso
-run: mykernel.iso
-	(killall VirtualBox && sleep 1)|| true
-	VirtualBox --start "My operating System" &
+%.o: %.s
+	$(AS) $(ASFLAGS) $< -o $@
+
+clean:
+	rm -rf *.o kernel.elf os.iso
+
