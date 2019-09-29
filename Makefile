@@ -5,9 +5,9 @@ LD_PARAMS = -melf_i386
 OBJS = loader.o kernel.o
 
 %.o: %.cpp
-	g++ $(GPP_PARAMS) -o $@ -c $<
+	gcc $(GPP_PARAMS) -o $@ -c $<
 
-%.o: %.s
+loader.o: loader.s
 	as $(ASM_PARAMS) -o $@ $<
 
 mykernel.bin: linker.ld $(OBJS)
@@ -24,7 +24,7 @@ mykernel.iso: mykernel.bin
 	echo 'set timeout=0' > iso/boot/grub/grub.cfg
 	echo 'set default=0' >> iso/boot/grub/grub.cfg
 	echo '' >> iso/boot/grub/grub.cfg
-	echo 'menuentry "My Operating System" {' >> iso/boot/grub/grub.cfg
+	echo 'menuentry "My operating System" {' >> iso/boot/grub/grub.cfg
 	echo '	multiboot /boot/mykernel.bin' >> iso/boot/grub/grub.cfg
 	echo '	boot' >> iso/boot/grub/grub.cfg
 	echo '}' >> iso/boot/grub/grub.cfg
