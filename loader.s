@@ -1,4 +1,5 @@
 global loader
+kmain
 
 MAGIC_NUMBER equ 0x1BADB002
 FLAGS	     equ 0x0
