@@ -1,5 +1,6 @@
-extern "C" int kmain () {
+#include "console.h"
 
+extern "C" int kmain () {
 	return 0;
 }
 

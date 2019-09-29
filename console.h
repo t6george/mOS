@@ -2,19 +2,8 @@
 #define CONSOLE_H
 
 #include "types.h"
-#include "io.h"
 
 class Console {
-	static constexpr u8* consoleBuff = static_cast<u8*> 0x000B8000;
-	static constexpr u8* fbCmdPort = 0x3B4;
-	static constexpr u8* fbDataPort = 0x3B4;
-	static constexpr setHiByte = 14;
-	static constexpr setLoByte = 15;
-
-	color defaultBg, defaultFg;
-	void printChar(const u32 ind, const u8 c, const color fg, const color bg) const;
-	extern void outb(u16 port, u8 val);
-	
 	public:
 
 	enum Color {
@@ -36,7 +25,24 @@ class Console {
 	Console(Color fg, Color bg);
 
 	void moveFbCursor(const u16 pos) const;
-	void print(const u8* s, const Color fg = defaultFg, const Color bg = defaultBg) const;
+	void print(const u8*s) const;
+	void print(const u8* s, const Color fg, const Color bg) const;
+
+
+	static constexpr u8 setHiByte = 14;
+	static constexpr u8 setLoByte = 15;
+	
+	static u8* frameBuffer;
+	static u8* fbCmdPort;
+	static u8* fbDataPort;
+
+
+	private:
+
+	Color defaultBg, defaultFg;
+	
+	void printChar(const u32 ind, const u8 c, const Color fg, const Color bg) const;
+		
 };
 
 #endif
