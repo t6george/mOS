@@ -27,7 +27,7 @@ os.iso: kernel.elf
 run: os.iso
 	bochs -f bochsrc.txt -q
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS)  $< -o $@
 
 %.o: %.s
