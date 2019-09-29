@@ -1,4 +1,4 @@
-int kmain () {
+extern "C" int kmain () {
 
 	return 0;
 }
