@@ -2,7 +2,7 @@ global loader
 
 MAGIC_NUMBER equ 0x1BADB002
 FLAGS	     equ 0x0
-CHECKSUM     equ -MAGIC_NUMBER
+CHECKSUM     equ -(MAGIC_NUMBER + FLAGS)
 STACK_SIZE   equ 0x1000
 
 section .text:
@@ -17,6 +17,7 @@ loader:
 	; using cdecl calling convention
 	
 	mov eax, 0xCAFEBABE
+	call kmain
 
 .loop:
 	jmp .loop
