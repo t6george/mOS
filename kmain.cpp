@@ -2,10 +2,7 @@
 
 extern "C" int kmain () {
 	Console console;
-	i8 s[3];
-	s[0] = 'h';
-	s[1] = 'i';
-	s[2] = '\0';
+	i8 s[11] = {'H','e','l','l','o',' ','M', 'o', 's', 's','\0'};
 	console.print(s);
 	return 0;
 }

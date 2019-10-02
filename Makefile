@@ -1,4 +1,4 @@
-OBJECTS = loader.o console.o io.o kmain.o
+OBJECTS = io.o loader.o console.o kmain.o
 CC = g++
 CFLAGS = -m32 -g -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -g -c
