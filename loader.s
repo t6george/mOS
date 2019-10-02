@@ -1,5 +1,5 @@
 global loader
-kmain
+extern kmain
 
 MAGIC_NUMBER equ 0x1BADB002
 FLAGS	     equ 0x0
@@ -20,8 +20,8 @@ loader:
 	mov eax, 0xCAFEBABE
 	call kmain
 
-.loop:
-	jmp .loop
+.loop_moss:
+	jmp .loop_moss
 
 section .bss
 align 4
