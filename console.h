@@ -23,12 +23,11 @@ class Console {
 		
 	Console();
 	Console(Color fg, Color bg);
-	~Console();
+	~Console() = default;
 
 	void moveFbCursor(const u16 pos) const;
 	void print(const i8*s) const;
-//	void print(const i8* s, const Color fg, const Color bg) const;
-
+	void print(const i8* s, const Color fg, const Color bg) const;
 
 	static constexpr u8 setHiByte = 14;
 	static constexpr u8 setLoByte = 15;

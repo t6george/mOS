@@ -8,14 +8,12 @@ Console::Console(): defaultBg(Console::Color::BLACK), defaultFg(Console::Color::
 
 Console::Console(Console::Color fg, Console::Color bg): defaultBg(bg), defaultFg(fg) {}
 
-Console::~Console() {}
-
 void inline Console::moveFbCursor(const u16 pos) const {
 	outb(fbCmdPort, setHiByte);
 	outb(fbDataPort, (u8)(pos >> 8));
 
 	outb(fbCmdPort, setLoByte);
-	outb(fbDataPort, (u8)pos);
+	outb(fbDataPort, 0xFF & pos);
 }
 
 void inline Console::printChar(const u32 ind, const i8 c, Console::Color fg, Console::Color bg) const {
@@ -26,13 +24,13 @@ void inline Console::printChar(const u32 ind, const i8 c, Console::Color fg, Con
 void Console::print(const i8* s) const {
 	u16 i = 0;
 	for (; '\0' != s[i]; ++i) {
-		printChar(2*i + 50, s[i], defaultFg, defaultBg);
+		printChar(2*i + 160, s[i], defaultFg, defaultBg);
 		moveFbCursor(i);
 	}
 }
 
-//void Console::print(const i8* s, const Color fg, const Color bg) const {
-//	u16 i = 0;
-//	for (; '\0' != s[i]; ++i)
-//		printChar(i, s[i], fg, bg);
-//}
+void Console::print(const i8* s, const Color fg, const Color bg) const {
+	u16 i = 0;
+	for (; '\0' != s[i]; ++i)
+		printChar(2 * i, s[i], fg, bg);
+}
