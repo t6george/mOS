@@ -14,6 +14,9 @@ class UartHal {
 	~UartHal() = default;
 	void setBaudRate(const u16 targetBaudRate);
 	void configLine() const;
+	void configQueue() const;
+	void configModem() const;
+	u8 queueIsEmpty() const;
 	private:
 	const u16 dataPort;
 	const u16 queueCmdPort;
@@ -24,29 +27,5 @@ class UartHal {
 }
 
 #endif
-
-extern "C" void outb(u16 port, u8 val);
-
-UartHal::UartHal(u16 dataPort): dataPort(dataPort), queueCmdPort(2 + dataPort),
-	lineCmdPort(3 +  dataPort), modemCmdPort(4 + dataPort),
-	lineStatusPort(5 + dataPort), baudRate(MAX_BAUD_RATE) {}
-
-void UartHal::setBaudRate(const u16 targetBaudRate) {
-	// TODO: replace this with an assertion
-	if (br > maxBaudRate)
-		return;
-
-	u16 rateFactor = maxBaudRate / targetBaudRate;
-	
-	outb(lineCmdPort, serialEnableDlab);
-	outb(dataPort, rateFactor >> 8);
-	outb(dataPort, 0x00FF & rateFactor);
-}
-
-void UartHal::configLine() const {
-	// TODO: add bitfield for val written to port
-	outb(lineCmdPort, 0x03);
-}
-
 
 
