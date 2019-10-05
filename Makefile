@@ -1,7 +1,7 @@
-OBJECTS = io.o loader.o console.o kmain.o
+OBJECTS = io.o loader.o console.o uarthal.o kmain.o
 CC = g++
 CFLAGS = -m32 -g -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -g -c
+	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -Wall -Werror -g -c
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf

@@ -1,15 +1,15 @@
 #include "uarthal.h"
 
 extern "C" void outb(u16 port, u8 val);
-extern "C" void inb(u16 port);
+extern "C" u8 inb(u16 port);
 
 UartHal::UartHal(u16 dataPort): dataPort(dataPort), queueCmdPort(2 + dataPort),
 	lineCmdPort(3 +  dataPort), modemCmdPort(4 + dataPort),
-	lineStatusPort(5 + dataPort), baudRate(MAX_BAUD_RATE) {}
+	lineStatusPort(5 + dataPort), baudRate(maxBaudRate) {}
 
-void UartHal::setBaudRate(const u16 targetBaudRate) {
+void UartHal::setBaudRate(const u32 targetBaudRate) {
 	// TODO: replace this with an assertion
-	if (br > maxBaudRate)
+	if (targetBaudRate > maxBaudRate)
 		return;
 
 	u16 rateFactor = maxBaudRate / targetBaudRate;
@@ -32,6 +32,17 @@ void UartHal::configModem() const {
 	outb(modemCmdPort, 0x3);
 }
 
-u8 queueIsEmpty() const {
+u8 UartHal::queueIsEmpty() const {
 	return inb(lineStatusPort) & 0x20;
+}
+
+void UartHal::outputChar(const i8 c) const {
+	// spin until transmission queue is empty
+	while (queueIsEmpty() == 0);
+	outb(dataPort, c);
+}
+
+void UartHal::print(const i8* s) const {
+	for(u16 i = 0; '\0' != s[i]; ++i)
+		outputChar(s[i]);
 }
