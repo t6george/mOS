@@ -3,9 +3,16 @@
 extern "C" void outb(u16 port, u8 val);
 extern "C" u8 inb(u16 port);
 
-UartHal::UartHal(u16 dataPort): dataPort(dataPort), queueCmdPort(2 + dataPort),
-	lineCmdPort(3 +  dataPort), modemCmdPort(4 + dataPort),
-	lineStatusPort(5 + dataPort), baudRate(maxBaudRate) {}
+UartHal::UartHal(u16 dataPort): dataPortAddr{dataPort}, queueCmdPort{new QueueCmdPort(2+ dataPort)},
+	lineCmdPort{new LineCmdPort(3 + data)}, modemCmdPort{new ModemCmdPort(4 + dataPort)},
+	lineStatusPort{new LineStatusPort(5 + dataPort)}, baudRate{maxBaudRate} {}
+
+UartHal::~UartHal() {
+	delete queueCmdPort;
+	delete lineCmdPort;
+	delete modemCmdPort;
+	delete lineStatusReg;
+}
 
 void UartHal::setBaudRate(const u32 targetBaudRate) {
 	// TODO: replace this with an assertion
@@ -14,32 +21,50 @@ void UartHal::setBaudRate(const u32 targetBaudRate) {
 
 	u16 rateFactor = maxBaudRate / targetBaudRate;
 	
-	outb(lineCmdPort, serialEnableDlab);
-	outb(dataPort, rateFactor >> 8);
-	outb(dataPort, 0x00FF & rateFactor);
+	outb(lineCmdPort, ENABLE_DLAB);
+	outb(dataPortAddr, rateFactor >> 8);
+	outb(dataPortAddr, 0x00FF & rateFactor);
 }
 
-void UartHal::configLine() const {
-	// TODO: add bitfield for val written to port
-	outb(lineCmdPort, 0x03);
+void defaultUartConfig() const {
+	defaultCfg::configLine();
+	defaultCfg::configQueue();
+	defaultCfg::configModem();
 }
 
-void UartHal::configQueue() const {
-	outb(queueCmdPort, 0xC7);
+void defaultCfg::UartHal::configLine() const {
+	lineCmdPort->contents.dataLen = 0x3;
+
+	outb(lineCmdPort->addr, lineCmdPort->contents.raw);
 }
 
-void UartHal::configModem() const {
-	outb(modemCmdPort, 0x3);
+void defaultCfg::UartHal::configQueue() const {
+	queueCmdPort->contents.enableQ = 0x1;
+	queueCmdPort->contents.clReceiveQ = 0x1;
+	queueCmdPort->contents.clTransmitQ = 0x1;
+
+	// 14 byte queue size
+	queueCmdPort->contents.qSize = 0x3;
+
+	outb(queueCmdPort->addr, queueCmdPort->contents.raw);
+}
+
+void defaultCfg::UartHal::configModem() const {
+	modemCmdPort->contents.dtr = 0x1;
+	modemCmdPort->contents.rts = 0x1;
+
+	outb(modemCmdPort->addr, modemCmdPort->contents.raw);
 }
 
 u8 UartHal::queueIsEmpty() const {
-	return inb(lineStatusPort) & 0x20;
+	lineStatusReg->contents.raw = inb(lineStatusReg->addr);
+	return lineStatusReg->contents.thre;
 }
 
 void UartHal::outputChar(const i8 c) const {
 	// spin until transmission queue is empty
 	while (queueIsEmpty() == 0);
-	outb(dataPort, c);
+	outb(dataPortAddr, c);
 }
 
 void UartHal::print(const i8* s) const {

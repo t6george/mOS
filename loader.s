@@ -17,11 +17,10 @@ loader:
 
 	; using cdecl calling convention
 	
-	mov eax, 0xCAFEBABE
 	call kmain
 
-.loop_moss:
-	jmp .loop_moss
+.loop:
+	jmp .loop
 
 section .bss
 align 4

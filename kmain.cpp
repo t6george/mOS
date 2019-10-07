@@ -1,8 +1,6 @@
 #include "console.h"
 #include "uarthal.h"
 
-#define SERIAL_COM1_BASE 0x3F8
-
 extern "C" int kmain () {
 	Console console;
 	UartHal uart(SERIAL_COM1_BASE);
