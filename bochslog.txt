@@ -31,7 +31,7 @@
 00000000000i[      ]   SB16 support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7fafe5353010. after alignment, vector=0x7fafe5354000
+00000000000i[MEM0  ] allocated memory at 0x7fda95c8c010. after alignment, vector=0x7fda95c8d000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Sun Oct  6 12:50:12 2019 (time0=1570380612)
+00000000000i[CMOS  ] Setting initial clock to: Mon Oct  7 00:38:33 2019 (time0=1570423113)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -70,7 +70,7 @@
 00000000000i[CD1   ] load cdrom with path='os.iso'
 00000000000i[CD1   ] Opening image file as a cd.
 00000000000i[HD    ] Media present in CD-ROM drive
-00000000000i[HD    ] Capacity is 241 sectors (0.47 MB)
+00000000000i[HD    ] Capacity is 243 sectors (0.47 MB)
 00000000000i[HD    ] Using boot sequence cdrom, none, none
 00000000000i[HD    ] Floppy boot signature check is enabled
 00000000000i[PLUGIN] init_dev of 'pci_ide' plugin device by virtual method
@@ -176,36 +176,36 @@
 00001500015i[BXVGA ] VBE known Display Interface b0c0
 00001500047i[BXVGA ] VBE known Display Interface b0c5
 00001502972i[VBIOS ] VBE Bios $Id: vbe.c,v 1.64 2011/07/19 18:25:05 vruppert Exp $
-00001942091i[XGUI  ] charmap update. Font Height is 16
-00005714591i[BIOS  ] IDE time out
-01336338614i[BIOS  ] Booting from 07c0:0000
-01336439914i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
-01336443594i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
-01336447259i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
-01338397220i[SER   ] com1: FIFO enabled
-01586636204i[GDBST ] Got byte 3
-01586636204i[GDBST ] stopped with ac3
-01586636204i[GDBST ] addr 0000000000100533 len 1
-01586636204p[GDBST ] >>PANIC<< Debugger asked us to quit
-01586636204i[CPU0  ] CPU is in protected mode (active)
-01586636204i[CPU0  ] CS.mode = 32 bit
-01586636204i[CPU0  ] SS.mode = 32 bit
-01586636204i[CPU0  ] EFER   = 0x00000000
-01586636204i[CPU0  ] | EAX=00000000  EBX=0002cd80  ECX=00000002  EDX=0000000a
-01586636204i[CPU0  ] | ESP=00103000  EBP=00067ee0  ESI=0002cef0  EDI=0002cef1
-01586636204i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf af PF cf
-01586636204i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-01586636204i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-01586636204i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-01586636204i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-01586636204i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-01586636204i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-01586636204i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-01586636204i[CPU0  ] | EIP=00100533 (00100533)
-01586636204i[CPU0  ] | CR0=0x60000011 CR2=0x00000000
-01586636204i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
-01586636204i[CPU0  ] 0x00100533>> jmp .-2 (0x00100533) : EBFE
-01586636204i[CMOS  ] Last time is 1570382198 (Sun Oct  6 13:16:38 2019)
-01586636204i[XGUI  ] Exit
-01586636204i[      ] restoring default signal behavior
-01586636204i[SIM   ] quit_sim called with exit code 1
+00002072242i[XGUI  ] charmap update. Font Height is 16
+00005714614i[BIOS  ] IDE time out
+01377283057i[BIOS  ] Booting from 07c0:0000
+01377384357i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
+01377388037i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
+01377391702i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
+01379387191i[SER   ] com1: FIFO enabled
+01553942119i[GDBST ] Got byte 3
+01553942119i[GDBST ] stopped with ac3
+01553942119i[GDBST ] addr 00000000001006ea len 1
+01553942119p[GDBST ] >>PANIC<< Debugger asked us to quit
+01553942119i[CPU0  ] CPU is in protected mode (active)
+01553942119i[CPU0  ] CS.mode = 32 bit
+01553942119i[CPU0  ] SS.mode = 32 bit
+01553942119i[CPU0  ] EFER   = 0x00000000
+01553942119i[CPU0  ] | EAX=00000000  EBX=0002cd80  ECX=00000003  EDX=0000000a
+01553942119i[CPU0  ] | ESP=00103000  EBP=00067ee0  ESI=0002cef0  EDI=0002cef1
+01553942119i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf af PF cf
+01553942119i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+01553942119i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+01553942119i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+01553942119i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+01553942119i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+01553942119i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+01553942119i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+01553942119i[CPU0  ] | EIP=001006ea (001006ea)
+01553942119i[CPU0  ] | CR0=0x60000011 CR2=0x00000000
+01553942119i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
+01553942119i[CPU0  ] 0x001006ea>> jmp .-2 (0x001006ea) : EBFE
+01553942119i[CMOS  ] Last time is 1570424666 (Mon Oct  7 01:04:26 2019)
+01553942119i[XGUI  ] Exit
+01553942119i[      ] restoring default signal behavior
+01553942119i[SIM   ] quit_sim called with exit code 1

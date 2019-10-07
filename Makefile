@@ -1,7 +1,7 @@
 OBJECTS = io.o loader.o console.o uarthal.o kmain.o
 CC = g++
 CFLAGS = -m32 -g -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -Wall -Werror -Isrc/bitfields -c
+	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -Wall -Werror -I./src/bitfields -c
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf
@@ -34,5 +34,5 @@ run: os.iso
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o kernel.elf os.iso
+	rm -rf *.o *.out kernel.elf os.iso
 

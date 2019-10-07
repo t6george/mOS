@@ -2,7 +2,7 @@
 #define UART_HAL
 
 #include "types.h"
-#include <uartports.h>
+#include "src/bitfields/uartports.h"
 
 #define SERIAL_COM1_BASE 0x3F8
 #define ENABLE_DLAB 0x80
@@ -15,24 +15,25 @@ class UartHal {
 
 	explicit UartHal(u16 dataPort);
 	~UartHal();
+
 	void setBaudRate(const u32 targetBaudRate);
-	u8 queueIsEmpty() const;
-	void print(const i8* s) const;
+	u8 queueIsEmpty();
+	void print(const i8* s) ;
+	void defaultUartConfig();
 
 	private:
-	void outputChar(const i8 c) const;
+	void outputChar(const i8 c);
 
-	namespace defaultCfg {
-		void configLine() const;
-		void configQueue() const;
-		void configModem() const;
-	}
+	void configLine();
+	void configQueue();
+	void configModem();
 
 	const u16 dataPortAddr;
-	QueueCmdPort* queueCmdPort;
-	LineCmdPort* lineCmdPort;
-	ModemCmdPort* modemCmdPort;
-	LineStatusReg* lineStatusPort;
+	// TODO: make these pointers (eventually unique)
+	QueueCmdPort queueCmdPort;
+	LineCmdPort lineCmdPort;
+	ModemCmdPort modemCmdPort;
+	LineStatusReg lineStatusReg;
 	u32 baudRate;
 };
 

@@ -4,26 +4,25 @@
 #include "../../types.h"
 
 typedef struct LineCmdPort {
-	LineCmdPort(const u16 addr): addr{addr}, contents.raw{0} {}
 	typedef union {
 		u8 raw;
-		struct fields {
-			u8 dataLen: 2;
-			u8 stop   : 1;
-			u8 parity : 3;
-			u8 br     : 1;
-			u8 dlab   : 1;
+		struct {
+			u8 dataLen : 2;
+			u8 stop    : 1;
+			u8 parity  : 3;
+			u8 br      : 1;
+			u8 dlab    : 1;
 		};
 	} Contents;
 	const u16 addr;
 	Contents contents;
+	LineCmdPort(const u16 addr): addr{addr}, contents{.raw = 0} {}
 } LineCmdPort;
 
 typedef struct QueueCmdPort {
-	QueueCmdPort(const u16 addr): addr{addr}, contents.raw{0} {}
 	typedef union {
 		u8 raw;
-		struct fields {
+		struct {
 			u8 enableQ     : 1;
 			u8 clReceiveQ  : 1;
 			u8 clTransmitQ : 1;
@@ -33,15 +32,16 @@ typedef struct QueueCmdPort {
 			u8 qSize       : 2;
 		};
 	} Contents;
+
 	const u16 addr;
 	Contents contents;
+	QueueCmdPort(const u16 addr): addr{addr}, contents{.raw = 0} {}
 } QueueCmdPort;
 
-typedef struct {
-	ModemCmdPort(const u16 addr): addr{addr}, contents.raw{0} {}
+typedef struct ModemCmdPort {
 	typedef union {
 		u8 raw;
-		struct fields {
+		struct {
 			u8 dtr      : 1;
 			u8 rts      : 1;
 			u8 ao1      : 1;
@@ -51,15 +51,16 @@ typedef struct {
 			u8 reserved : 2;
 		};
 	} Contents;
+
 	const u16 addr;
 	Contents contents;
+	ModemCmdPort(const u16 addr): addr{addr}, contents{.raw = 0} {}
 } ModemCmdPort;
 
 typedef struct LineStatusReg {
-	LineStatusReg(const u16 addr): addr{addr}, contents.raw{0} {}
 	typedef union {
 		u8 raw;
-		struct fields {
+		struct {
 			u8 dataReady      : 1;
 			u8 overrunE       : 1;
 			u8 parityE        : 1;
@@ -70,8 +71,10 @@ typedef struct LineStatusReg {
 			u8 impendingE     : 1;
 		};
 	} Contents;
+
 	const u16 addr;
 	Contents contents;
+	LineStatusReg(const u16 addr): addr{addr}, contents{.raw = 0} {}
 } LineStatusReg;
 
 #endif
