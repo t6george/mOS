@@ -1,5 +1,6 @@
 #include "console.h"
 #include "uarthal.h"
+#include "gdt.h"
 
 extern "C" int kmain () {
 	Console console;
@@ -8,6 +9,14 @@ extern "C" int kmain () {
 	console.print(s);
 	uart.defaultUartConfig();
 	uart.print(s);
+
+	GlobalDescriptorTable gdt;
+	gdt.initNullDescriptor();
+	gdt.initCodeDescriptor();
+	gdt.initDataDescriptors();
+	gdt.writeGdt();
+
+
 	return 0;
 }
 
