@@ -1,8 +1,8 @@
 #include "gdt.h"
 
-extern void set_data_segments(u8 table_offset)
-extern void set_code_segment(u8 table_offset);
-extern void set_gdt_loc(u32 specifier_addr);
+extern "C" void set_data_segments(u8 table_offset);
+extern "C" void set_code_segment(u8 table_offset);
+extern "C" void set_gdt_loc(u32 specifier_addr);
 
 
 GlobalDescriptorTable::GlobalDescriptorTable(): 
@@ -22,17 +22,12 @@ void GlobalDescriptorTable::initCodeDescriptor () {
     descriptor.raw = 0x0;
 
     descriptor.type = MemSegmentType::SEG_CODE_EXRD;
-
-    // descriptor.base_low = 0;
-    // descriptor.base_high = 0;
+;
     descriptor.limit_low = 0xFFFF;
     descriptor.limit_high = 0xF;
     descriptor.always_1 = 0x1;
-    // descriptor.dpl = 0;
     descriptor.present = 0x1;
-    // descriptor.avl = 0;
     descriptor.big = 0x1;
-    // descriptor.long_mode = 0;
     descriptor.granularity = 0x1;
 
     segments[segI] = descriptor;
@@ -47,16 +42,11 @@ void GlobalDescriptorTable::initDataDescriptor() {
 
     descriptor.type = MemSegmentType::SEG_DATA_RDWR;
 
-    // descriptor.base_low = 0;
-    // descriptor.base_high = 0;
     descriptor.limit_low = 0xFFFF;
     descriptor.limit_high = 0xF;
     descriptor.always_1 = 0x1;
-    // descriptor.dpl = 0;
     descriptor.present = 0x1;
-    // descriptor.avl = 0;
     descriptor.big = 0x1;
-    // descriptor.long_mode = 0;
     descriptor.granularity = 0x1;
 
     segments[segI] = descriptor;

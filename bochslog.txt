@@ -31,7 +31,7 @@
 00000000000i[      ]   SB16 support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7f33a6627010. after alignment, vector=0x7f33a6628000
+00000000000i[MEM0  ] allocated memory at 0x7fe71728d010. after alignment, vector=0x7fe71728e000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Tue Oct  8 22:01:27 2019 (time0=1570586487)
+00000000000i[CMOS  ] Setting initial clock to: Wed Oct  9 00:44:06 2019 (time0=1570596246)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -70,7 +70,7 @@
 00000000000i[CD1   ] load cdrom with path='os.iso'
 00000000000i[CD1   ] Opening image file as a cd.
 00000000000i[HD    ] Media present in CD-ROM drive
-00000000000i[HD    ] Capacity is 244 sectors (0.48 MB)
+00000000000i[HD    ] Capacity is 245 sectors (0.48 MB)
 00000000000i[HD    ] Using boot sequence cdrom, none, none
 00000000000i[HD    ] Floppy boot signature check is enabled
 00000000000i[PLUGIN] init_dev of 'pci_ide' plugin device by virtual method
@@ -151,7 +151,7 @@
 00000000000i[CPU0  ] | CR0=0x60000010 CR2=0x00000000
 00000000000i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
 00000000000i[CPU0  ] 0x0000fff0>> jmpf 0xf000:e05b : EA5BE000F0
-00000000000i[CMOS  ] Last time is 1570586487 (Tue Oct  8 22:01:27 2019)
+00000000000i[CMOS  ] Last time is 1570596246 (Wed Oct  9 00:44:06 2019)
 00000000000i[XGUI  ] Exit
 00000000000i[      ] restoring default signal behavior
 00000000000i[SIM   ] quit_sim called with exit code 1

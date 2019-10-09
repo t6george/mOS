@@ -13,7 +13,7 @@ extern "C" int kmain () {
 	GlobalDescriptorTable gdt;
 	gdt.initNullDescriptor();
 	gdt.initCodeDescriptor();
-	gdt.initDataDescriptors();
+	gdt.initDataDescriptor();
 	gdt.writeGdt();
 
 

@@ -1,4 +1,4 @@
-OBJECTS = io.o loader.o console.o uarthal.o gdt_api.o gdt.o kmain.o
+OBJECTS = io.o gdt_api.o loader.o console.o uarthal.o gdt.o kmain.o
 CC = g++
 CFLAGS = -m32 -g -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -Wall -Werror -I./src/bitfields -c
