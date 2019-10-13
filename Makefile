@@ -1,4 +1,9 @@
-OBJECTS = io.o gdt_api.o loader.o console.o uarthal.o gdt.o kmain.o
+BUILD_DIR ?= ./build
+SRC_DIR ?= ./src
+
+SOURCES := $(shell find . -name "*.cpp" -or -name "*.s")
+OBJECTS := $(addsuffix .o,$(basename $(SOURCES)))
+#OBJECTS = io.o gdt_api.o loader.o console.o uarthal.o gdt.o kmain.o
 CC = g++
 CFLAGS = -m32 -g -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -Wall -Werror -I./src/bitfields -c
