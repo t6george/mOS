@@ -2,7 +2,7 @@
 #define UART_HAL
 
 #include "types.h"
-#include "src/bitfields/uartports.h"
+#include <uartports.h>
 
 #define SERIAL_COM1_BASE 0x3F8
 #define ENABLE_DLAB 0x80
