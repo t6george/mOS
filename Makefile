@@ -4,8 +4,8 @@ HEADER_DIR ?= include
 
 SOURCES := $(shell find . -name "*.cpp" -or -name "*.s")
 OBJECTS := $(addsuffix .o,$(basename $(SOURCES)))
-INCLUDES = $(shell find include -type d | sed s/^/-I/)
-#OBJECTS = io.o gdt_api.o loader.o console.o uarthal.o gdt.o kmain.o
+INCLUDES := $(shell find include -type d | sed s/^/-I/)
+
 CPPC = g++
 CPPFLAGS = -m32 -g -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 	-nostartfiles -nodefaultlibs -fno-exceptions -fno-rtti -Wall -Werror -I./src/bitfields -c

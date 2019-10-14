@@ -1,7 +1,7 @@
 #ifndef UART_PORTS
 #define UART_PORTS
 
-#include "../../types.h"
+#include <types.h>
 
 typedef struct LineCmdPort {
 	typedef union {
