@@ -1,7 +1,7 @@
 #ifndef GDT
 #define GDT
 
-#include "types.h"
+#include <types.h>
 
 #define GDT_SIZE 3
 
