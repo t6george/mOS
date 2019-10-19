@@ -5,38 +5,59 @@
 
 #define GDT_SIZE 256
 
-extern void isr0();
-extern void isr1();
-extern void isr2();
-extern void isr3();
-extern void isr4();
-extern void isr5();
-extern void isr6();
-extern void isr7();
-extern void isr8();
-extern void isr9();
-extern void isr10();
-extern void isr11();
-extern void isr12();
-extern void isr13();
-extern void isr14();
-extern void isr15();
-extern void isr16();
-extern void isr17();
-extern void isr18();
-extern void isr19();
-extern void isr20();
-extern void isr21();
-extern void isr22();
-extern void isr23();
-extern void isr24();
-extern void isr25();
-extern void isr26();
-extern void isr27();
-extern void isr28();
-extern void isr29();
-extern void isr30();
-extern void isr31();
+extern void isr_0();
+extern void isr_1();
+extern void isr_2();
+extern void isr_3();
+extern void isr_4();
+extern void isr_5();
+extern void isr_6();
+extern void isr_7();
+
+extern void isr_8();
+extern void isr_9();
+extern void isr_10();
+extern void isr_11();
+extern void isr_12();
+extern void isr_13();
+extern void isr_14();
+extern void isr_15();
+
+extern void isr_16();
+extern void isr_17();
+extern void isr_18();
+extern void isr_19();
+extern void isr_20();
+extern void isr_21();
+extern void isr_22();
+extern void isr_23();
+
+extern void isr_24();
+extern void isr_25();
+extern void isr_26();
+extern void isr_27();
+extern void isr_28();
+extern void isr_29();
+extern void isr_30();
+extern void isr_31();
+
+extern void isr_32();
+extern void isr_33();
+extern void isr_34();
+extern void isr_35();
+extern void isr_36();
+extern void isr_37();
+extern void isr_38();
+extern void isr_39();
+
+extern void isr_40();
+extern void isr_41();
+extern void isr_42();
+extern void isr_43();
+extern void isr_44();
+extern void isr_45();
+extern void isr_46();
+extern void isr_47();
 
 class InterruptDescriptorTable {
     private:
